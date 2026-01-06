@@ -52,6 +52,7 @@ p, li, h1, h2, h3, h4, h5, h6, div, span {
 .sidebar {
   direction: rtl;
   text-align: right;
+  background-color: #303030 !important;
   
   // RTL for sidebar navigation menu
   .sidebar-menu-container {
@@ -201,6 +202,7 @@ a[href*="github.com"].quarto-navigation-tool > i.fa-github {
 .sidebar-header {
   display: flex !important;
   flex-direction: column !important;
+  background-color: #303030 !important;
   
   .sidebar-logo-link {
     order: 3 !important;

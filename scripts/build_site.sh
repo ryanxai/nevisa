@@ -8,7 +8,7 @@ find . -type f -name "README.md" -not -path "./README.md" | while read -r readme
 done
 quarto render --to html
 # Remove all copied source files, but keep _quarto.yml, _site/, site_libs/, and the PDF
-find . -mindepth 1 -maxdepth 1 ! -name _metadata.yml ! -name 'header.html' ! -name 'prompts.txt' ! -name 'logo.svg' ! -name 'icon.png' ! -name '_quarto.yml' ! -name '_site' ! -name 'site_libs' ! -name '.quarto' ! -name 'index.qmd' ! -name 'about.qmd' ! -name 'theme.scss' ! -name 'theme-dark.scss' ! -exec rm -rf {} +
+find . -mindepth 1 -maxdepth 1 ! -name 'about.png' ! -name 'about.md' ! -name _metadata.yml ! -name 'header.html' ! -name 'prompts.txt' ! -name 'logo.svg' ! -name 'icon.png' ! -name '_quarto.yml' ! -name '_site' ! -name 'site_libs' ! -name '.quarto' ! -name 'index.qmd' ! -name 'about.qmd' ! -name 'theme.scss' ! -name 'theme-dark.scss' ! -exec rm -rf {} +
 rm -rf ../../output/site/*
 mv _site/* ../../output/site
 # Copy images directory so images are accessible from the website
