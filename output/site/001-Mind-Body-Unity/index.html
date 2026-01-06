@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2026-01-05">
 <meta name="description" content="تحقیقات شگفت‌انگیز دکتر اِلن لنگر درباره ارتباط ذهن و بدن">
 
-<title>index – چیستا</title>
+<title>index – چیستا: پلی میان دانش جهانی و زبان فارسی</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../icon.svg" rel="icon" type="image/svg+xml">
+<link href="../icon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -46,9 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4a8cc08f7d0771b37caf88efa7759464.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-7e09621a361021c8d3174b2dab8edc16.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-4a8cc08f7d0771b37caf88efa7759464.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-7bf782f34cc1c10c2c89c593bc5be2aa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-8fad583824e074d4b34fa6ae67ea9f1a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-7bf782f34cc1c10c2c89c593bc5be2aa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -159,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
     // Set website title in mobile navigation bar
     const navTitle = document.querySelector('.quarto-secondary-nav-title');
     if (navTitle) {
-      navTitle.textContent = "چیستا";
+      navTitle.textContent = "چیستا: پلی میان دانش جهانی و زبان فارسی";
     }
     
     // Function to check if dark mode is active
@@ -260,12 +260,12 @@ ul.task-list li input[type="checkbox"] {
       const sidebarHeader = document.querySelector('.sidebar-header');
       if (!logoLink || !sidebarHeader) return false;
       
-      // Update logo link to point to homepage (index.html)
+      // Update logo link to point to about page (about.html)
       const pathname = window.location.pathname;
       const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
       const depth = segments.length;
       const rootPath = depth > 0 ? '../'.repeat(depth) : './';
-      logoLink.href = rootPath + 'index.html';
+      logoLink.href = rootPath + 'about.html';
       logoLink.removeAttribute('target');
       logoLink.removeAttribute('rel');
       
@@ -273,15 +273,15 @@ ul.task-list li input[type="checkbox"] {
       if (!document.querySelector('.sidebar-title-link')) {
         const titleLink = document.createElement('a');
         titleLink.className = 'sidebar-title-link';
-        titleLink.textContent = "چیستا";
-        // Calculate path to index.html
+        titleLink.textContent = 'چیستا: پلی میان دانش جهانی و زبان فارسی';
+        // Calculate path to about.html
         const pathname = window.location.pathname;
         const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
         const depth = segments.length;
         const rootPath = depth > 0 ? '../'.repeat(depth) : './';
-        titleLink.href = rootPath + 'index.html';
-        titleLink.title = 'Home';
-        titleLink.setAttribute('aria-label', "چیستا - Home");
+        titleLink.href = rootPath + 'about.html';
+        titleLink.title = 'About';
+        titleLink.setAttribute('aria-label', "چیستا: پلی میان دانش جهانی و زبان فارسی - About");
         // Insert before sidebar-tools-main
         const toolsMain = document.querySelector('.sidebar-tools-main');
         if (toolsMain) {
@@ -334,6 +334,70 @@ ul.task-list li input[type="checkbox"] {
     });
     observer.observe(document.body, { childList: true, subtree: true });
     
+    // Function to add homepage link to sidebar menu
+    function addHomepageLink() {
+      // Check if the link already exists by looking for the specific text
+      const existingLinks = document.querySelectorAll('.sidebar-item-text');
+      for (let link of existingLinks) {
+        if (link.textContent.trim() === 'فهرست نوشته ها') {
+          return true;
+        }
+      }
+      
+      // Find the about link
+      const aboutLink = document.querySelector('a.sidebar-item-text[href*="about.html"]');
+      if (!aboutLink) return false;
+      
+      // Find the parent list item
+      const aboutListItem = aboutLink.closest('.sidebar-item');
+      if (!aboutListItem) return false;
+      
+      // Calculate relative path to index.html
+      const pathname = window.location.pathname;
+      const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
+      const depth = segments.length;
+      const rootPath = depth > 0 ? '../'.repeat(depth) : './';
+      
+      // Create new list item for homepage link
+      const homepageListItem = document.createElement('li');
+      homepageListItem.className = 'sidebar-item';
+      
+      const itemContainer = document.createElement('div');
+      itemContainer.className = 'sidebar-item-container';
+      
+      const homepageLink = document.createElement('a');
+      homepageLink.href = rootPath + 'index.html';
+      homepageLink.className = 'sidebar-item-text sidebar-link';
+      
+      const menuText = document.createElement('span');
+      menuText.className = 'menu-text';
+      menuText.textContent = 'فهرست نوشته ها';
+      
+      homepageLink.appendChild(menuText);
+      itemContainer.appendChild(homepageLink);
+      homepageListItem.appendChild(itemContainer);
+      
+      // Insert after the about link's list item
+      aboutListItem.parentNode.insertBefore(homepageListItem, aboutListItem.nextSibling);
+      
+      return true;
+    }
+    
+    // Try to add homepage link immediately
+    if (!addHomepageLink()) {
+      setTimeout(function() {
+        if (!addHomepageLink()) {
+          setTimeout(addHomepageLink, 500);
+        }
+      }, 100);
+    }
+    
+    // Use mutation observer to catch dynamically loaded sidebar menu
+    const menuObserver = new MutationObserver(function(mutations) {
+      addHomepageLink();
+    });
+    menuObserver.observe(document.body, { childList: true, subtree: true });
+    
     // Fix source link for index page: map index.md to README.md
     function fixIndexSourceLink() {
       // Check if we're on the index page
@@ -364,7 +428,7 @@ ul.task-list li input[type="checkbox"] {
         return true;
       }
       
-      // If clicking on logo link (but not title), navigate to homepage
+      // If clicking on logo link (but not title), navigate to about page
       if (clickedLink && !clickedTitle) {
         e.preventDefault();
         e.stopPropagation();
@@ -372,7 +436,7 @@ ul.task-list li input[type="checkbox"] {
         const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
         const depth = segments.length;
         const rootPath = depth > 0 ? '../'.repeat(depth) : './';
-        window.location.href = rootPath + 'index.html';
+        window.location.href = rootPath + 'about.html';
         return false;
       }
     }, true); // Use capture phase
@@ -572,13 +636,13 @@ ul.task-list li input[type="checkbox"] {
 </script>
 
 
-<meta property="og:title" content="چیستا">
+<meta property="og:title" content="چیستا: پلی میان دانش جهانی و زبان فارسی">
 <meta property="og:description" content="تحقیقات شگفت‌انگیز دکتر اِلن لنگر درباره ارتباط ذهن و بدن">
 <meta property="og:image" content="https://chista.ryanxai.com/001-Mind-Body-Unity/infographic.png">
-<meta property="og:site_name" content="چیستا">
+<meta property="og:site_name" content="چیستا: پلی میان دانش جهانی و زبان فارسی">
 <meta property="og:image:height" content="1536">
 <meta property="og:image:width" content="2752">
-<meta name="twitter:title" content="چیستا">
+<meta name="twitter:title" content="چیستا: پلی میان دانش جهانی و زبان فارسی">
 <meta name="twitter:description" content="تحقیقات شگفت‌انگیز دکتر اِلن لنگر درباره ارتباط ذهن و بدن">
 <meta name="twitter:image" content="https://chista.ryanxai.com/001-Mind-Body-Unity/infographic.png">
 <meta name="twitter:creator" content="@ryanxai">
@@ -806,20 +870,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../001-Mind-Body-Unity/2-summary.html" class="sidebar-item-text sidebar-link">
+  <a href="../001-Mind-Body-Unity/2-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">منابع</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../001-Mind-Body-Unity/3-summary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">خلاصه</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../001-Mind-Body-Unity/3-transcript.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ترانوشت</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../001-Mind-Body-Unity/4-references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">منابع و ارجاعات</span></a>
+  <a href="../001-Mind-Body-Unity/4-transcript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ترانسکریپت</span></a>
   </div>
 </li>
       </ul>
@@ -862,11 +926,72 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>خلاصه
+<span class="screen-reader-only">Note</span>منابع
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="مقالات" class="level2">
+<h2 class="anchored" data-anchor-id="مقالات">مقالات</h2>
+<ul>
+<li><a href="https://psycnet.apa.org/record/1979-29338-001">اثرات بلندمدت مداخله مرتبط با کنترل در سالمندان نهادینه‌شده</a> (<em>مجله شخصیت و روانشناسی اجتماعی</em>)</li>
+<li><a href="https://journals.sagepub.com/doi/10.1111/j.1467-9280.2007.01867.x?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">ذهنیت مهم است: ورزش و اثر دارونما</a> (<em>علوم روانشناسی</em>)</li>
+<li><a href="https://bmjopen.bmj.com/content/9/7/e030411">پیری به عنوان یک ذهنیت: پروتکل مطالعه برای جوان‌سازی بزرگسالان مسن با مداخله روانشناختی خلاف جهت عقربه‌های ساعت</a> (<em>BMJ Open</em>)</li>
+<li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0022399919307081?via%3Dihub">دستکاری درک مدت زمان خواب عملکرد شناختی را تغییر می‌دهد – یک تحلیل اکتشافی</a> (<em>مجله تحقیقات روان‌تنی</em>)</li>
+<li><a href="https://www.nature.com/articles/s41598-023-50009-3">شفای فیزیکی به عنوان تابعی از زمان ادراک شده</a> (<em>گزارش‌های علمی</em>)</li>
+<li><a href="https://psycnet.apa.org/record/1974-25775-001">بیمار با هر نام دیگری…: تفاوت گروهی بالینگران در سوگیری برچسب‌زنی</a> (<em>مجله مشاوره و روانشناسی بالینی</em>)</li>
+<li><a href="https://journals.sagepub.com/doi/10.1177/0956797610366543?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">دیدن یعنی باور کردن: استفاده از بی‌ذهنیتی (با ذهنیت) برای بهبود حدت بینایی</a> (<em>علوم روانشناسی</em>)</li>
+<li><a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1333248/full">اثر مرزی برای دیابت: زمانی که هیچ تفاوتی تفاوت ایجاد می‌کند</a> (<em>مرزهای روانشناسی</em>)</li>
+<li><a href="https://journals.physiology.org/doi/abs/10.1152/jn.1992.67.5.1071?rfr_dat=cr_pub++0pubmed&amp;url_ver=Z39.88-2003&amp;rfr_id=ori%3Arid%3Acrossref.org">تغییرات در ویژگی‌های پاسخ زمانی توزیع‌شده نورون‌های قشر SI بازتاب بهبود عملکرد در یک کار تمایز لمسی مبتنی بر زمان است</a> (<em>مجله نوروفیزیولوژی</em>)</li>
+<li><a href="https://www.jstor.org/stable/1914185">نظریه چشم‌انداز: تحلیل تصمیم‌گیری تحت ریسک</a> (<em>اکونومتریکا</em>)</li>
+</ul>
+</section>
+<section id="کتابها" class="level2">
+<h2 class="anchored" data-anchor-id="کتابها">کتاب‌ها</h2>
+<ul>
+<li><a href="https://www.amazon.com/gp/product/0593497945?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=a66fef4df5efd5db4e2a3fe0f98220b0&amp;language=en_US&amp;ref_=as_li_ss_tl">بدن ذهن‌آگاه: فکر کردن به راه سلامت مزمن</a></li>
+<li><a href="https://www.amazon.com/Prince-Medicine-Galen-Roman-Empire/dp/019976767X?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=02487af6e66d34c65559e6303ab75364&amp;language=en_US&amp;ref_=as_li_ss_tl">شاهزاده پزشکی: جالینوس در امپراتوری روم</a></li>
+<li><a href="https://www.amazon.com/Why-We-Sleep-Unlocking-Dreams/dp/1501144324?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=1731df707ee7724c7061132f5602024f&amp;language=en_US&amp;ref_=as_li_ss_tl">چرا می‌خوابیم: گشودن قدرت خواب و رویاها</a></li>
+<li><a href="https://www.amazon.com/gp/product/B0028M9EZK?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=86f99e728171e6817deefa7e34ae42c2&amp;language=en_US&amp;ref_=as_li_ss_tl">خلاف جهت عقربه‌های ساعت: سلامت ذهن‌آگاه و قدرت امکان</a></li>
+<li><a href="https://www.amazon.com/Creative-Act-Way-Being/dp/0593652886?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=ef2d6c3be1e92d7155f22ebd043df816&amp;language=en_US&amp;ref_=as_li_ss_tl">عمل خلاق: راهی برای بودن</a></li>
+<li><a href="https://www.amazon.com/Escape-Freedom-Erich-Fromm/dp/0805031499?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=989acf27a4582396054b1f9e5cdff104&amp;language=en_US&amp;ref_=as_li_ss_tl">فرار از آزادی</a></li>
+<li><a href="https://www.amazon.com/Coddling-American-Mind-Intentions-Generation/dp/0735224919?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=19fc0701c3232b35f099d8db8712d640&amp;language=en_US&amp;ref_=as_li_ss_tl">نازپروردگی ذهن آمریکایی: چگونه نیات خوب و ایده‌های بد یک نسل را برای شکست آماده می‌کنند</a></li>
+<li><a href="https://www.amazon.com/Anxious-Generation-Haidt-Jonathan/dp/1802063277?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=5fdc88bff205f53cfe8f3c58ff069862&amp;language=en_US&amp;ref_=as_li_ss_tl">نسل مضطرب</a></li>
+</ul>
+</section>
+<section id="اپیزودهای-ذکر-شده-از-هوبرمن-لب" class="level2">
+<h2 class="anchored" data-anchor-id="اپیزودهای-ذکر-شده-از-هوبرمن-لب">اپیزودهای ذکر شده از هوبرمن لب</h2>
+<ul>
+<li><a href="https://www.hubermanlab.com/episode/guest-series-dr-matthew-walker-the-biology-of-sleep-your-unique-sleep-needs">سری مهمان | دکتر مت واکر: زیست‌شناسی خواب و نیازهای منحصر به فرد خواب شما</a></li>
+<li><a href="https://www.hubermanlab.com/episode/optimal-protocols-for-studying-learning">پروتکل‌های بهینه برای مطالعه و یادگیری</a></li>
+</ul>
+</section>
+<section id="اشخاص-ذکر-شده" class="level2">
+<h2 class="anchored" data-anchor-id="اشخاص-ذکر-شده">اشخاص ذکر شده</h2>
+<ul>
+<li><a href="https://profiles.stanford.edu/alia-crum">آلیا کرام</a>: استاد روانشناسی، دانشگاه استنفورد</li>
+<li><a href="https://www.britannica.com/biography/Rene-Descartes">رنه دکارت</a>: فیلسوف و ریاضیدان فرانسوی</li>
+<li><a href="https://news.stanford.edu/stories/2021/05/psychology-professor-lee-ross-dead-78">لی راس</a>: استاد روانشناسی، دانشگاه استنفورد</li>
+<li><a href="https://www.britannica.com/biography/Roger-Bannister">راجر بنیستر</a>: عصب‌شناس و دونده بریتانیایی</li>
+<li><a href="https://www.nobelprize.org/prizes/medicine/1981/wiesel/facts/">تورستن ویزل</a>: نوروفیزیولوژیست سوئدی، برنده جایزه نوبل</li>
+<li><a href="https://www.nobelprize.org/prizes/medicine/1981/hubel/facts/">دیوید هیوبل</a>: عصب‌زیست‌شناس کانادایی-آمریکایی، برنده جایزه نوبل</li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>خلاصه
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="مقدمه" class="level2">
 <h2 class="anchored" data-anchor-id="مقدمه">مقدمه</h2>
@@ -911,16 +1036,16 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>ترانوشت
+<span class="screen-reader-only">Note</span>ترانسکریپت
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>اندرو هیوبرمن:</strong> به پادکست آزمایشگاه هیوبرمن (Huberman Lab) خوش آمدید، جایی که ما در آن درباره علم و ابزارهای مبتنی بر علم برای زندگی روزمره بحث می‌کنیم. من اندرو هیوبرمن هستم و استاد نوروبیولوژی و چشم‌پزشکی در دانشکده پزشکی استنفورد هستم. مهمان امروز من دکتر الن لنگر (Dr.&nbsp;Ellen Langer) است. دکتر الن لنگر استاد روانشناسی در دانشگاه هاروارد و یکی از پیشگامان برجسته جهان در زمینه ارتباط ذهن و بدن است؛ به طور خاص اینکه چگونه افکار ما بر سلامت ما تأثیر می‌گذارند. دکتر الن لنگر یکی از اولین افرادی بود که به طور سیستماتیک و با دقت علمی، ارتباط ذهن و بدن را بررسی کرد. آزمایشگاه او یافته‌های واقعاً خیره‌کننده زیادی داشته است. به عنوان مثال، امروز درباره مطالعه‌ای خواهید شنید که دکتر لنگر انجام داد و در آن افراد مسن را به آزمایشگاه خود آورد، یا بهتر بگوییم، آزمایشگاهی طراحی کرد که افراد در آن زندگی می‌کردند، اما خود آزمایشگاه به گونه‌ای طراحی شده بود که شبیه محیطی باشد - از نوع مبلمان و ظروف گرفته تا موسیقی و غیره - که آن افراد ۲۰ سال پیش در آن زندگی کرده بودند. وقتی آن سوژه‌ها کمتر از یک هفته در آن آزمایشگاه زندگی کردند، تغییر محیط و تعامل آن‌ها با آن محیط باعث شد تا تحرک بسیار بیشتر، عملکرد شناختی بهتر و تعداد زیادی از نشانگرهای دیگر پیری بیولوژیکی در آن‌ها معکوس شود، که کاملاً شگفت‌انگیز است و از قدرت فوق‌العاده‌ای حکایت دارد که ذهن بر بیولوژی ما دارد. این تنها یک نمونه از انواع آزمایش‌هایی است که دکتر لنگر انجام داده است، باز هم با دقت علمی بسیار بالا. بنابراین امروز، دکتر لنگر و من درباره این صحبت می‌کنیم که چگونه کسب دانش - صرفاً یادگیری درباره مکانیسم‌های بیولوژیکی خاص - و همچنین ذهنیت شما درباره جنبه‌های مختلف سلامت و رفاهتان می‌تواند به شدت بر سلامت و رفاه شما تأثیر بگذارد. ما درباره طول عمر صحبت می‌کنیم، درباره ورزش و کاهش وزن صحبت می‌کنیم، درباره بیماری‌های عفونی صحبت می‌کنیم؛ در واقع، ما همچنین درباره اینکه چگونه ذهنیت می‌تواند بر نتایج سرطان یا به عبارتی غلبه بر سرطان تأثیر بگذارد، صحبت می‌کنیم. ما مثال‌ها، مکانیسم‌ها و کاربرد عملی آن مکانیسم‌ها را مورد بحث قرار می‌دهیم. تا پایان اپیزود امروز، من به شما اطمینان می‌دهم که دکتر الن لنگر طرز فکر شما را نسبت به ارتباط ذهن و بدن و نحوه تفکر شما در مورد سلامتی‌تان تغییر خواهد داد و به شما اطمینان می‌دهم که موضوع فقط مثبت‌اندیشی نیست. در واقع، دکتر الن لنگر ما را وامی‌دارد تا درباره سوالات علمی، سلامتی‌مان و تقریباً هر چیز دیگری در جهان متفاوت فکر کنیم. به زودی خواهید دید که او روشی کاملاً منحصر به فرد برای تفکر نه تنها در مورد علم و سلامت، بلکه به طور کلی در مورد زندگی و آنچه یک زندگی واقعاً خوب را می‌سازد، دارد. دکتر الن لنگر یک چهره درخشان و پیشگام واقعی در این حوزه از سلامت ذهن و بدن است و همچنین یک معلم فوق‌العاده است. قبل از شروع، می‌خواهم تأکید کنم که این پادکست از نقش‌های آموزشی و پژوهشی من در استنفورد جدا است. با این حال، بخشی از تمایل و تلاش من برای ارائه اطلاعات رایگان درباره علم و ابزارهای مرتبط با علم به عموم مردم است. در راستای این موضوع، این اپیزود شامل حامیان مالی (اسپانسرها) می‌شود. و حالا برای گفتگو با دکتر الن لنگر. دکتر الن لنگر، خوش آمدید.</p>
 <p><strong>دکتر الن لنگر:</strong> ممنونم اندرو، خیلی خوشحالم که اینجا هستم.</p>
@@ -1089,67 +1214,6 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>اندرو هیوبرمن:</strong> من عاشق آهنگ شدم. و ممنون که گفتید دوباره برمی‌گردید. خیلی ممنونم.</p>
 <p><strong>دکتر الن لنگر:</strong> ممنون که مرا دعوت کردی.</p>
 <p><em>(اندرو هیوبرمن در پایان از شنوندگان تشکر کرده و به معرفی کتاب جدیدش Protocols و راه‌های ارتباطی در رسانه‌های اجتماعی می‌پردازد.)</em></p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>منابع و ارجاعات
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<section id="مقالات" class="level2">
-<h2 class="anchored" data-anchor-id="مقالات">مقالات</h2>
-<ul>
-<li><a href="https://psycnet.apa.org/record/1979-29338-001">اثرات بلندمدت مداخله مرتبط با کنترل در سالمندان نهادینه‌شده</a> (<em>مجله شخصیت و روانشناسی اجتماعی</em>)</li>
-<li><a href="https://journals.sagepub.com/doi/10.1111/j.1467-9280.2007.01867.x?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">ذهنیت مهم است: ورزش و اثر دارونما</a> (<em>علوم روانشناسی</em>)</li>
-<li><a href="https://bmjopen.bmj.com/content/9/7/e030411">پیری به عنوان یک ذهنیت: پروتکل مطالعه برای جوان‌سازی بزرگسالان مسن با مداخله روانشناختی خلاف جهت عقربه‌های ساعت</a> (<em>BMJ Open</em>)</li>
-<li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0022399919307081?via%3Dihub">دستکاری درک مدت زمان خواب عملکرد شناختی را تغییر می‌دهد – یک تحلیل اکتشافی</a> (<em>مجله تحقیقات روان‌تنی</em>)</li>
-<li><a href="https://www.nature.com/articles/s41598-023-50009-3">شفای فیزیکی به عنوان تابعی از زمان ادراک شده</a> (<em>گزارش‌های علمی</em>)</li>
-<li><a href="https://psycnet.apa.org/record/1974-25775-001">بیمار با هر نام دیگری…: تفاوت گروهی بالینگران در سوگیری برچسب‌زنی</a> (<em>مجله مشاوره و روانشناسی بالینی</em>)</li>
-<li><a href="https://journals.sagepub.com/doi/10.1177/0956797610366543?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">دیدن یعنی باور کردن: استفاده از بی‌ذهنیتی (با ذهنیت) برای بهبود حدت بینایی</a> (<em>علوم روانشناسی</em>)</li>
-<li><a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1333248/full">اثر مرزی برای دیابت: زمانی که هیچ تفاوتی تفاوت ایجاد می‌کند</a> (<em>مرزهای روانشناسی</em>)</li>
-<li><a href="https://journals.physiology.org/doi/abs/10.1152/jn.1992.67.5.1071?rfr_dat=cr_pub++0pubmed&amp;url_ver=Z39.88-2003&amp;rfr_id=ori%3Arid%3Acrossref.org">تغییرات در ویژگی‌های پاسخ زمانی توزیع‌شده نورون‌های قشر SI بازتاب بهبود عملکرد در یک کار تمایز لمسی مبتنی بر زمان است</a> (<em>مجله نوروفیزیولوژی</em>)</li>
-<li><a href="https://www.jstor.org/stable/1914185">نظریه چشم‌انداز: تحلیل تصمیم‌گیری تحت ریسک</a> (<em>اکونومتریکا</em>)</li>
-</ul>
-</section>
-<section id="کتابها" class="level2">
-<h2 class="anchored" data-anchor-id="کتابها">کتاب‌ها</h2>
-<ul>
-<li><a href="https://www.amazon.com/gp/product/0593497945?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=a66fef4df5efd5db4e2a3fe0f98220b0&amp;language=en_US&amp;ref_=as_li_ss_tl">بدن ذهن‌آگاه: فکر کردن به راه سلامت مزمن</a></li>
-<li><a href="https://www.amazon.com/Prince-Medicine-Galen-Roman-Empire/dp/019976767X?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=02487af6e66d34c65559e6303ab75364&amp;language=en_US&amp;ref_=as_li_ss_tl">شاهزاده پزشکی: جالینوس در امپراتوری روم</a></li>
-<li><a href="https://www.amazon.com/Why-We-Sleep-Unlocking-Dreams/dp/1501144324?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=1731df707ee7724c7061132f5602024f&amp;language=en_US&amp;ref_=as_li_ss_tl">چرا می‌خوابیم: گشودن قدرت خواب و رویاها</a></li>
-<li><a href="https://www.amazon.com/gp/product/B0028M9EZK?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=86f99e728171e6817deefa7e34ae42c2&amp;language=en_US&amp;ref_=as_li_ss_tl">خلاف جهت عقربه‌های ساعت: سلامت ذهن‌آگاه و قدرت امکان</a></li>
-<li><a href="https://www.amazon.com/Creative-Act-Way-Being/dp/0593652886?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=ef2d6c3be1e92d7155f22ebd043df816&amp;language=en_US&amp;ref_=as_li_ss_tl">عمل خلاق: راهی برای بودن</a></li>
-<li><a href="https://www.amazon.com/Escape-Freedom-Erich-Fromm/dp/0805031499?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=989acf27a4582396054b1f9e5cdff104&amp;language=en_US&amp;ref_=as_li_ss_tl">فرار از آزادی</a></li>
-<li><a href="https://www.amazon.com/Coddling-American-Mind-Intentions-Generation/dp/0735224919?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=19fc0701c3232b35f099d8db8712d640&amp;language=en_US&amp;ref_=as_li_ss_tl">نازپروردگی ذهن آمریکایی: چگونه نیات خوب و ایده‌های بد یک نسل را برای شکست آماده می‌کنند</a></li>
-<li><a href="https://www.amazon.com/Anxious-Generation-Haidt-Jonathan/dp/1802063277?&amp;linkCode=ll1&amp;tag=hubermanlab-20&amp;linkId=5fdc88bff205f53cfe8f3c58ff069862&amp;language=en_US&amp;ref_=as_li_ss_tl">نسل مضطرب</a></li>
-</ul>
-</section>
-<section id="اپیزودهای-ذکر-شده-از-هوبرمن-لب" class="level2">
-<h2 class="anchored" data-anchor-id="اپیزودهای-ذکر-شده-از-هوبرمن-لب">اپیزودهای ذکر شده از هوبرمن لب</h2>
-<ul>
-<li><a href="https://www.hubermanlab.com/episode/guest-series-dr-matthew-walker-the-biology-of-sleep-your-unique-sleep-needs">سری مهمان | دکتر مت واکر: زیست‌شناسی خواب و نیازهای منحصر به فرد خواب شما</a></li>
-<li><a href="https://www.hubermanlab.com/episode/optimal-protocols-for-studying-learning">پروتکل‌های بهینه برای مطالعه و یادگیری</a></li>
-</ul>
-</section>
-<section id="اشخاص-ذکر-شده" class="level2">
-<h2 class="anchored" data-anchor-id="اشخاص-ذکر-شده">اشخاص ذکر شده</h2>
-<ul>
-<li><a href="https://profiles.stanford.edu/alia-crum">آلیا کرام</a>: استاد روانشناسی، دانشگاه استنفورد</li>
-<li><a href="https://www.britannica.com/biography/Rene-Descartes">رنه دکارت</a>: فیلسوف و ریاضیدان فرانسوی</li>
-<li><a href="https://news.stanford.edu/stories/2021/05/psychology-professor-lee-ross-dead-78">لی راس</a>: استاد روانشناسی، دانشگاه استنفورد</li>
-<li><a href="https://www.britannica.com/biography/Roger-Bannister">راجر بنیستر</a>: عصب‌شناس و دونده بریتانیایی</li>
-<li><a href="https://www.nobelprize.org/prizes/medicine/1981/wiesel/facts/">تورستن ویزل</a>: نوروفیزیولوژیست سوئدی، برنده جایزه نوبل</li>
-<li><a href="https://www.nobelprize.org/prizes/medicine/1981/hubel/facts/">دیوید هیوبل</a>: عصب‌زیست‌شناس کانادایی-آمریکایی، برنده جایزه نوبل</li>
-</ul>
-</section>
 </div>
 </div>
 </div>

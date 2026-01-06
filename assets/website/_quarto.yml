@@ -7,11 +7,11 @@ project:
 
 website:
   site-url: "https://chista.ryanxai.com"
-  title: "چیستا"
+  title: "چیستا: پلی میان دانش جهانی و زبان فارسی"
   bread-crumbs: false
   page-navigation: false
-  favicon: icon.svg
-  description: "چیستا"
+  favicon: icon.png
+  description: "چیستا: پلی میان دانش جهانی و زبان فارسی"
 
   open-graph: true
 

@@ -145,9 +145,9 @@ combine_markdown_files() {
         # Get site URL once for all links
         site_url=$(get_site_url)
         
-        # Add transcript link if 3-transcript.md exists
-        if [ -f "$subdir/3-transcript.md" ] && [ -n "$site_url" ]; then
-            echo "- [ترانوشت]($site_url/$episode_folder/3-transcript.html)" >> "$output_file"
+        # Add transcript link if 4-transcript.md exists
+        if [ -f "$subdir/4-transcript.md" ] && [ -n "$site_url" ]; then
+            echo "- [ترانسکریپت]($site_url/$episode_folder/4-transcript.html)" >> "$output_file"
         fi
         
         # Add slides link if slides.pdf exists

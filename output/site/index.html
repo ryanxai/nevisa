@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>چیستا</title>
+<title>چیستا: پلی میان دانش جهانی و زبان فارسی</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./icon.svg" rel="icon" type="image/svg+xml">
+<link href="./icon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -45,9 +45,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4a8cc08f7d0771b37caf88efa7759464.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-7e09621a361021c8d3174b2dab8edc16.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4a8cc08f7d0771b37caf88efa7759464.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7bf782f34cc1c10c2c89c593bc5be2aa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-8fad583824e074d4b34fa6ae67ea9f1a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-7bf782f34cc1c10c2c89c593bc5be2aa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -187,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
     // Set website title in mobile navigation bar
     const navTitle = document.querySelector('.quarto-secondary-nav-title');
     if (navTitle) {
-      navTitle.textContent = "چیستا";
+      navTitle.textContent = "چیستا: پلی میان دانش جهانی و زبان فارسی";
     }
     
     // Function to check if dark mode is active
@@ -288,12 +288,12 @@ ul.task-list li input[type="checkbox"] {
       const sidebarHeader = document.querySelector('.sidebar-header');
       if (!logoLink || !sidebarHeader) return false;
       
-      // Update logo link to point to homepage (index.html)
+      // Update logo link to point to about page (about.html)
       const pathname = window.location.pathname;
       const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
       const depth = segments.length;
       const rootPath = depth > 0 ? '../'.repeat(depth) : './';
-      logoLink.href = rootPath + 'index.html';
+      logoLink.href = rootPath + 'about.html';
       logoLink.removeAttribute('target');
       logoLink.removeAttribute('rel');
       
@@ -301,15 +301,15 @@ ul.task-list li input[type="checkbox"] {
       if (!document.querySelector('.sidebar-title-link')) {
         const titleLink = document.createElement('a');
         titleLink.className = 'sidebar-title-link';
-        titleLink.textContent = "چیستا";
-        // Calculate path to index.html
+        titleLink.textContent = 'چیستا: پلی میان دانش جهانی و زبان فارسی';
+        // Calculate path to about.html
         const pathname = window.location.pathname;
         const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
         const depth = segments.length;
         const rootPath = depth > 0 ? '../'.repeat(depth) : './';
-        titleLink.href = rootPath + 'index.html';
-        titleLink.title = 'Home';
-        titleLink.setAttribute('aria-label', "چیستا - Home");
+        titleLink.href = rootPath + 'about.html';
+        titleLink.title = 'About';
+        titleLink.setAttribute('aria-label', "چیستا: پلی میان دانش جهانی و زبان فارسی - About");
         // Insert before sidebar-tools-main
         const toolsMain = document.querySelector('.sidebar-tools-main');
         if (toolsMain) {
@@ -362,6 +362,70 @@ ul.task-list li input[type="checkbox"] {
     });
     observer.observe(document.body, { childList: true, subtree: true });
     
+    // Function to add homepage link to sidebar menu
+    function addHomepageLink() {
+      // Check if the link already exists by looking for the specific text
+      const existingLinks = document.querySelectorAll('.sidebar-item-text');
+      for (let link of existingLinks) {
+        if (link.textContent.trim() === 'فهرست نوشته ها') {
+          return true;
+        }
+      }
+      
+      // Find the about link
+      const aboutLink = document.querySelector('a.sidebar-item-text[href*="about.html"]');
+      if (!aboutLink) return false;
+      
+      // Find the parent list item
+      const aboutListItem = aboutLink.closest('.sidebar-item');
+      if (!aboutListItem) return false;
+      
+      // Calculate relative path to index.html
+      const pathname = window.location.pathname;
+      const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
+      const depth = segments.length;
+      const rootPath = depth > 0 ? '../'.repeat(depth) : './';
+      
+      // Create new list item for homepage link
+      const homepageListItem = document.createElement('li');
+      homepageListItem.className = 'sidebar-item';
+      
+      const itemContainer = document.createElement('div');
+      itemContainer.className = 'sidebar-item-container';
+      
+      const homepageLink = document.createElement('a');
+      homepageLink.href = rootPath + 'index.html';
+      homepageLink.className = 'sidebar-item-text sidebar-link';
+      
+      const menuText = document.createElement('span');
+      menuText.className = 'menu-text';
+      menuText.textContent = 'فهرست نوشته ها';
+      
+      homepageLink.appendChild(menuText);
+      itemContainer.appendChild(homepageLink);
+      homepageListItem.appendChild(itemContainer);
+      
+      // Insert after the about link's list item
+      aboutListItem.parentNode.insertBefore(homepageListItem, aboutListItem.nextSibling);
+      
+      return true;
+    }
+    
+    // Try to add homepage link immediately
+    if (!addHomepageLink()) {
+      setTimeout(function() {
+        if (!addHomepageLink()) {
+          setTimeout(addHomepageLink, 500);
+        }
+      }, 100);
+    }
+    
+    // Use mutation observer to catch dynamically loaded sidebar menu
+    const menuObserver = new MutationObserver(function(mutations) {
+      addHomepageLink();
+    });
+    menuObserver.observe(document.body, { childList: true, subtree: true });
+    
     // Fix source link for index page: map index.md to README.md
     function fixIndexSourceLink() {
       // Check if we're on the index page
@@ -392,7 +456,7 @@ ul.task-list li input[type="checkbox"] {
         return true;
       }
       
-      // If clicking on logo link (but not title), navigate to homepage
+      // If clicking on logo link (but not title), navigate to about page
       if (clickedLink && !clickedTitle) {
         e.preventDefault();
         e.stopPropagation();
@@ -400,7 +464,7 @@ ul.task-list li input[type="checkbox"] {
         const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
         const depth = segments.length;
         const rootPath = depth > 0 ? '../'.repeat(depth) : './';
-        window.location.href = rootPath + 'index.html';
+        window.location.href = rootPath + 'about.html';
         return false;
       }
     }, true); // Use capture phase
@@ -629,12 +693,12 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="چیستا">
+<meta property="og:title" content="چیستا: پلی میان دانش جهانی و زبان فارسی">
 <meta property="og:image" content="https://chista.ryanxai.com/001-Mind-Body-Unity/infographic.png">
-<meta property="og:site_name" content="چیستا">
+<meta property="og:site_name" content="چیستا: پلی میان دانش جهانی و زبان فارسی">
 <meta property="og:image:height" content="1536">
 <meta property="og:image:width" content="2752">
-<meta name="twitter:title" content="چیستا">
+<meta name="twitter:title" content="چیستا: پلی میان دانش جهانی و زبان فارسی">
 <meta name="twitter:image" content="https://chista.ryanxai.com/logo.svg">
 <meta name="twitter:creator" content="@ryanxai">
 <meta name="twitter:card" content="summary_large_image">
@@ -859,20 +923,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./001-Mind-Body-Unity/2-summary.html" class="sidebar-item-text sidebar-link">
+  <a href="./001-Mind-Body-Unity/2-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">منابع</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-Mind-Body-Unity/3-summary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">خلاصه</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./001-Mind-Body-Unity/3-transcript.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ترانوشت</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./001-Mind-Body-Unity/4-references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">منابع و ارجاعات</span></a>
+  <a href="./001-Mind-Body-Unity/4-transcript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ترانسکریپت</span></a>
   </div>
 </li>
       </ul>
@@ -899,7 +963,7 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1767600000000" data-listing-file-modified-sort="1767677092572" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="148" data-listing-word-count-sort="29450">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1767600000000" data-listing-file-modified-sort="1767728064792" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="148" data-listing-word-count-sort="29448">
 <div class="thumbnail"><a href="./001-Mind-Body-Unity/index.html" class="no-external">
 
 <img loading="lazy" src="./001-Mind-Body-Unity/infographic.png" class="thumbnail-image" style="height: 200px;">

@@ -81,7 +81,7 @@
     // Set website title in mobile navigation bar
     const navTitle = document.querySelector('.quarto-secondary-nav-title');
     if (navTitle) {
-      navTitle.textContent = "چیستا";
+      navTitle.textContent = "چیستا: پلی میان دانش جهانی و زبان فارسی";
     }
     
     // Function to check if dark mode is active
@@ -182,12 +182,12 @@
       const sidebarHeader = document.querySelector('.sidebar-header');
       if (!logoLink || !sidebarHeader) return false;
       
-      // Update logo link to point to homepage (index.html)
+      // Update logo link to point to about page (about.html)
       const pathname = window.location.pathname;
       const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
       const depth = segments.length;
       const rootPath = depth > 0 ? '../'.repeat(depth) : './';
-      logoLink.href = rootPath + 'index.html';
+      logoLink.href = rootPath + 'about.html';
       logoLink.removeAttribute('target');
       logoLink.removeAttribute('rel');
       
@@ -195,15 +195,15 @@
       if (!document.querySelector('.sidebar-title-link')) {
         const titleLink = document.createElement('a');
         titleLink.className = 'sidebar-title-link';
-        titleLink.textContent = "چیستا";
-        // Calculate path to index.html
+        titleLink.textContent = 'چیستا: پلی میان دانش جهانی و زبان فارسی';
+        // Calculate path to about.html
         const pathname = window.location.pathname;
         const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
         const depth = segments.length;
         const rootPath = depth > 0 ? '../'.repeat(depth) : './';
-        titleLink.href = rootPath + 'index.html';
-        titleLink.title = 'Home';
-        titleLink.setAttribute('aria-label', "چیستا - Home");
+        titleLink.href = rootPath + 'about.html';
+        titleLink.title = 'About';
+        titleLink.setAttribute('aria-label', "چیستا: پلی میان دانش جهانی و زبان فارسی - About");
         // Insert before sidebar-tools-main
         const toolsMain = document.querySelector('.sidebar-tools-main');
         if (toolsMain) {
@@ -256,6 +256,70 @@
     });
     observer.observe(document.body, { childList: true, subtree: true });
     
+    // Function to add homepage link to sidebar menu
+    function addHomepageLink() {
+      // Check if the link already exists by looking for the specific text
+      const existingLinks = document.querySelectorAll('.sidebar-item-text');
+      for (let link of existingLinks) {
+        if (link.textContent.trim() === 'فهرست نوشته ها') {
+          return true;
+        }
+      }
+      
+      // Find the about link
+      const aboutLink = document.querySelector('a.sidebar-item-text[href*="about.html"]');
+      if (!aboutLink) return false;
+      
+      // Find the parent list item
+      const aboutListItem = aboutLink.closest('.sidebar-item');
+      if (!aboutListItem) return false;
+      
+      // Calculate relative path to index.html
+      const pathname = window.location.pathname;
+      const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
+      const depth = segments.length;
+      const rootPath = depth > 0 ? '../'.repeat(depth) : './';
+      
+      // Create new list item for homepage link
+      const homepageListItem = document.createElement('li');
+      homepageListItem.className = 'sidebar-item';
+      
+      const itemContainer = document.createElement('div');
+      itemContainer.className = 'sidebar-item-container';
+      
+      const homepageLink = document.createElement('a');
+      homepageLink.href = rootPath + 'index.html';
+      homepageLink.className = 'sidebar-item-text sidebar-link';
+      
+      const menuText = document.createElement('span');
+      menuText.className = 'menu-text';
+      menuText.textContent = 'فهرست نوشته ها';
+      
+      homepageLink.appendChild(menuText);
+      itemContainer.appendChild(homepageLink);
+      homepageListItem.appendChild(itemContainer);
+      
+      // Insert after the about link's list item
+      aboutListItem.parentNode.insertBefore(homepageListItem, aboutListItem.nextSibling);
+      
+      return true;
+    }
+    
+    // Try to add homepage link immediately
+    if (!addHomepageLink()) {
+      setTimeout(function() {
+        if (!addHomepageLink()) {
+          setTimeout(addHomepageLink, 500);
+        }
+      }, 100);
+    }
+    
+    // Use mutation observer to catch dynamically loaded sidebar menu
+    const menuObserver = new MutationObserver(function(mutations) {
+      addHomepageLink();
+    });
+    menuObserver.observe(document.body, { childList: true, subtree: true });
+    
     // Fix source link for index page: map index.md to README.md
     function fixIndexSourceLink() {
       // Check if we're on the index page
@@ -286,7 +350,7 @@
         return true;
       }
       
-      // If clicking on logo link (but not title), navigate to homepage
+      // If clicking on logo link (but not title), navigate to about page
       if (clickedLink && !clickedTitle) {
         e.preventDefault();
         e.stopPropagation();
@@ -294,7 +358,7 @@
         const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
         const depth = segments.length;
         const rootPath = depth > 0 ? '../'.repeat(depth) : './';
-        window.location.href = rootPath + 'index.html';
+        window.location.href = rootPath + 'about.html';
         return false;
       }
     }, true); // Use capture phase

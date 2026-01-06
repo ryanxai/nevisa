@@ -189,7 +189,7 @@ a[href*="github.com"].quarto-navigation-tool > i.fa-github {
     display: block !important;
     text-align: center !important;
     font-family: $font-family !important;
-    font-size: 2rem !important;
+    font-size: 1.4rem !important;
     font-weight: 600 !important;
     color: #333 !important;
     text-decoration: none !important;
@@ -460,4 +460,65 @@ ul li, ol li {
 .callout .callout-header[aria-expanded="true"] .callout-toggle::before,
 .callout .callout-header:not(.collapsed) .callout-toggle::before {
   transform: none !important;
+}
+
+// Style blog post links in the listing to appear as blue underlined links
+.quarto-listing {
+  .listing-title a,
+  .listing-description a {
+    color: #0066cc !important;
+    text-decoration: underline !important;
+    
+    &:hover {
+      color: #0052a3 !important;
+      text-decoration: underline !important;
+    }
+    
+    &:visited {
+      color: #551a8b !important;
+      text-decoration: underline !important;
+    }
+    
+    &:hover:visited {
+      color: #6a1fb8 !important;
+      text-decoration: underline !important;
+    }
+  }
+}
+
+// Dark mode support for blog post links
+[data-mode="dark"] .quarto-listing,
+.quarto-color-scheme-alternate .quarto-listing {
+  .listing-title a,
+  .listing-description a {
+    color: #5eb3f6 !important;
+    text-decoration: underline !important;
+    
+    &:hover {
+      color: #7bc4ff !important;
+      text-decoration: underline !important;
+    }
+    
+    &:visited {
+      color: #b794f6 !important;
+      text-decoration: underline !important;
+    }
+    
+    &:hover:visited {
+      color: #c9a8ff !important;
+      text-decoration: underline !important;
+    }
+  }
+}
+
+// Reduce height of about page image
+.about-image {
+  max-height: 350 !important;
+  object-fit: cover !important;
+  width: 100% !important;
+}
+
+.about-image-container {
+  max-height: 350px !important;
+  overflow: hidden !important;
 }
