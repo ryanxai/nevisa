@@ -25,8 +25,11 @@ website:
 
   sidebar:
     # title: "چیستا"
+    contents: auto
     style: "floating"
     search: true
+    collapse-level: 1
+    collapsed: true
     tools:
       - icon: podcast
         href: https://castbox.fm/channel/6694416?country=iran
@@ -47,6 +50,7 @@ format:
     code-overflow: wrap
     toc: false
     dir: rtl
+    title-block-style: none
     include-in-header:
       file: header.html
 

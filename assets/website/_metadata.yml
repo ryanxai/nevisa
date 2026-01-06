@@ -11,4 +11,5 @@ listing:
     - description
     - date
     - image
+    - author
   image-height: 200px

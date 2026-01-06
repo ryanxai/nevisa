@@ -1,5 +1,6 @@
 # Metadata that will be merged with front matter of files in this directory
-title: وحدت ذهن و تن
-date: 2024-01-15
-image: infographic.png
+# title removed to allow each page to use its own H1 header as title
 description: "تحقیقات شگفت‌انگیز دکتر اِلن لنگر درباره ارتباط ذهن و بدن"
+author: "رایان قرباندوست"
+date: 2026-01-05
+image: infographic.png

@@ -104,6 +104,21 @@ try:
         
         return modified_content
     
+    def update_html_page_date(html_content, jalali_date):
+        """
+        Update HTML content to replace dates in <p class="date"> elements at the top of blog posts.
+        """
+        # Pattern to match content inside <p class="date"> elements
+        # This will match any text between <p class="date"> and </p>
+        pattern = r'(<p class="date">)(.*?)(</p>)'
+        
+        def replace_date(match):
+            return match.group(1) + jalali_date + match.group(3)
+        
+        modified_content = re.sub(pattern, replace_date, html_content, flags=re.DOTALL)
+        
+        return modified_content
+    
     def convert_html_dates(html_content, date_map, html_file_path):
         """
         Find and convert date strings in HTML content based on metadata dates.
@@ -111,11 +126,12 @@ try:
         # Extract folder name from HTML file path (e.g., "001-Mind-Body-Unity" from "output/site/001-Mind-Body-Unity/index.html")
         html_path = Path(html_file_path)
         
-        # For index.html, we need to find dates in listing-date divs and match them to metadata
-        # For other HTML files, we can use the folder name
+        # Check if this is the main site index.html (in the site root) vs a blog post index.html (in a subdirectory)
+        # The main site index is directly under the 'site' folder
+        is_main_site_index = html_path.name == 'index.html' and html_path.parent.name == 'site'
         
-        # If this is index.html, we need to handle multiple listings
-        if html_path.name == 'index.html':
+        # If this is the main site index.html, we need to handle listing-date divs
+        if is_main_site_index:
             # Find all listing-date divs and match them to folder names from nearby hrefs
             modified_content = html_content
             
@@ -172,6 +188,8 @@ try:
                 if jalali_date:
                     # Update listing-date divs
                     modified_content = update_html_with_jalali_date(html_content, jalali_date)
+                    # Update <p class="date"> elements at the top of blog posts
+                    modified_content = update_html_page_date(modified_content, jalali_date)
                     return modified_content
             
             return html_content
