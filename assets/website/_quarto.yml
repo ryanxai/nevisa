@@ -1,0 +1,62 @@
+project:
+  type: website
+  render:
+    - "*.qmd"
+    - "*.md"
+    - "!1-subjects.md"
+
+website:
+  site-url: "https://chista.ryanxai.com"
+  title: "چیستا"
+  bread-crumbs: false
+  page-navigation: false
+  favicon: icon.png
+  description: "چیستا"
+
+  open-graph: true
+
+  twitter-card:
+    creator: "@ryanxai"
+    image: "logo.svg"
+
+  page-footer:
+    left: "© ۱۴۰۴، رایان قرباندوست."
+    # background: "#D9E3E4"
+
+  sidebar:
+    # title: "چیستا"
+    contents: auto
+    background: "#D9E3E4"
+    logo: "logo.svg"
+    pinned: true
+    align: center
+    tools:
+      - icon: podcast
+        href: https://castbox.fm/channel/6694416?country=iran
+        text: "Castbox"  
+      - icon: file-pdf
+        href: Chista.pdf
+        text: "PDF"
+
+    # style: "docked"
+    search: true
+    collapse-level: 1
+
+format:
+  html:
+    grid:
+      sidebar-width: "260px"
+    theme:
+      light: [cosmo, theme.scss]
+      dark: [cosmo, theme-dark.scss]
+    mainfont: "Vazirmatn"
+    code-copy: true
+    code-overflow: wrap
+    toc: false
+    dir: rtl
+    include-in-header:
+      file: header.html
+
+freeze: auto
+
+editor: visual

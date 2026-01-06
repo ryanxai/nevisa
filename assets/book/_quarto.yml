@@ -1,0 +1,39 @@
+project:
+  type: book
+
+book:
+  title: "چیستا"
+  author: "رایان قرباندوست"
+  chapters:
+    - index.md
+    - ../../output/Chista.md
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    include-in-header: preamble.tex
+    pdf-engine: xelatex
+    latex-options:
+      - -shell-escape
+    mainfont: "Vazirmatn"
+    lang: fa
+    dir: rtl
+    toc: true
+    toc-title: "فهرست مطالب"
+    number-sections: false
+    colorlinks: true
+    documentclass: scrreprt
+    geometry:
+      - top=1.5cm
+      - bottom=1.5cm
+      - left=1.5cm
+      - right=1.5cm
+      - footskip=0.8cm
+    resource-files:
+      - ../../assets/images
+      - ../../source

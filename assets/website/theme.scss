@@ -1,0 +1,451 @@
+/*-- scss:defaults --*/
+
+$font-family: "Vazirmatn", sans-serif;
+
+/*-- scss:rules --*/
+
+// RTL text alignment
+body {
+  direction: rtl;
+  text-align: right;
+}
+
+// Ensure main content is RTL
+main {
+  direction: rtl;
+  text-align: right;
+}
+
+// RTL for paragraphs and text elements
+p, li, h1, h2, h3, h4, h5, h6, div, span {
+  direction: rtl;
+  text-align: right;
+}
+
+// RTL for sidebar
+.sidebar {
+  direction: rtl;
+  text-align: right;
+  
+  // RTL for sidebar navigation menu
+  .sidebar-menu-container {
+    direction: rtl;
+    text-align: right;
+    
+    ul {
+      direction: rtl;
+      text-align: right;
+      padding-right: 0;
+      padding-left: 1rem;
+    }
+    
+    li.sidebar-item {
+      direction: rtl;
+      text-align: right;
+    }
+    
+    .sidebar-item-container {
+      direction: rtl;
+      text-align: right;
+      flex-direction: row-reverse;
+    }
+    
+    .sidebar-item-text {
+      direction: rtl;
+      text-align: right !important;
+      padding-right: 0.5rem;
+      padding-left: 0;
+      
+      // Override Bootstrap text-start class for RTL
+      &.text-start {
+        text-align: right !important;
+      }
+    }
+    
+    .sidebar-item-toggle {
+      direction: rtl;
+      margin-right: auto;
+      margin-left: 0;
+      order: -1;
+    }
+    
+    .sidebar-link {
+      direction: rtl;
+      text-align: right;
+    }
+    
+    .sidebar-section {
+      direction: rtl;
+      text-align: right;
+      padding-right: 1rem;
+      padding-left: 0;
+    }
+    
+    // Chevron icons are handled via JavaScript
+    // Reset any transforms
+    .sidebar-item-toggle .bi {
+      transform: none !important;
+    }
+  }
+}
+
+// RTL for navigation
+.navbar {
+  direction: rtl;
+}
+
+// RTL for lists
+ul, ol {
+  direction: rtl;
+  text-align: right;
+}
+
+// RTL for code blocks (keep LTR for code content)
+pre {
+  direction: ltr;
+  text-align: left;
+}
+
+code {
+  direction: ltr;
+  text-align: left;
+}
+
+.render-commit-push {
+  padding: 0.5em 0.5em 0em 3em;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: #f8f8f8 5px center/3em no-repeat;
+  border-top: 1px solid #5B888C;
+  border-bottom: 1px solid #5B888C;
+  background-size: 2em;
+  background-position: 0.5em 0.5em;
+}
+
+.pull {
+  padding: 0.5em 0.5em 0em 3em;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: #f8f8f8 5px center/3em no-repeat;
+  border-top: 1px solid #E0A890;
+  border-bottom: 1px solid #E0A890;
+  background-size: 1em;
+  background-position: 1em 0.5em;
+}
+
+// Make PDF icon larger
+a[href*="Chista.pdf"].quarto-navigation-tool > i.fa-file-pdf,
+a[href*="Chista.pdf"].quarto-navigation-tool > i.bi-file-pdf {
+  font-size: 1.6em !important;
+}
+
+// Make Castbox icon larger
+a[href*="castbox.fm"].quarto-navigation-tool > i.bi-podcast,
+a[href*="castbox.fm"].quarto-navigation-tool > i.fa-headphones {
+  font-size: 1.6em !important;
+}
+
+// Style dark/light toggle icons (sun and moon)
+.quarto-color-scheme-toggle.quarto-navigation-tool > i.bi,
+.quarto-color-scheme-toggle.quarto-navigation-tool > i.fa-sun,
+.quarto-color-scheme-toggle.quarto-navigation-tool > i.fa-moon {
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+  font-size: 1.6em !important;
+}
+
+// Reorder sidebar: icons above title, title above logo
+.sidebar-header {
+  display: flex !important;
+  flex-direction: column !important;
+  
+  .sidebar-logo-link {
+    order: 3 !important;
+    position: relative !important;
+    margin-top: 0.5rem !important;
+  }
+  
+  .sidebar-tools-main {
+    order: 1 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  // Style for clickable title link
+  .sidebar-title-link {
+    order: 0 !important;
+    display: block !important;
+    text-align: center !important;
+    font-family: $font-family !important;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+    text-decoration: none !important;
+    width: 100% !important;
+    margin-bottom: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+    transition: color 0.2s ease !important;
+    
+    &:hover {
+      color: #007bff !important;
+      text-decoration: none !important;
+    }
+    
+    &:visited {
+      color: #333 !important;
+    }
+    
+    &:hover:visited {
+      color: #007bff !important;
+    }
+  }
+}
+
+// Make sidebar logo visible on mobile devices
+// Override Bootstrap's d-lg-inline d-none classes
+.sidebar-logo-link .sidebar-logo,
+.sidebar-logo.light-content,
+.sidebar-logo.dark-content {
+  display: inline-block !important;
+  max-width: 100px !important;
+  height: auto !important;
+  width: auto !important;
+  
+  // Make logo smaller on mobile devices
+  @media (max-width: 991.98px) {
+    display: inline-block !important;
+    max-width: 80px !important;
+    height: auto !important;
+    width: auto !important;
+  }
+}
+
+// Make logo white in dark mode
+// Invert the logo colors when dark mode is active
+[data-mode="dark"] .sidebar-logo,
+.quarto-color-scheme-alternate .sidebar-logo,
+.sidebar-logo.dark-content {
+  filter: invert(1) !important;
+}
+
+// Increase spacing between navigation tool icons
+.sidebar-tools-main {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  
+  .quarto-navigation-tool {
+    margin: 0 !important;
+    padding: 0.5rem !important;
+  }
+  
+  // Style home icon - make it smaller than other icons
+  .sidebar-home-link {
+    font-size: 1.1em !important;
+    
+    i {
+      font-size: 1.1em !important;
+    }
+  }
+  
+  // Title is now added via JavaScript as a clickable link
+  // Removed ::before pseudo-element to allow for clickable link
+}
+
+// Change mobile hamburger icon to standard bi-list icon
+.quarto-btn-toggle i.bi-layout-text-sidebar-reverse::before {
+  content: "\f479" !important; // bi-list icon
+}
+
+// Make hamburger icon bigger and move it to the right
+.quarto-btn-toggle i.bi-layout-text-sidebar-reverse {
+  font-size: 1.5em !important;
+  margin-left: 1rem !important;
+}
+
+// Style episode player iframe for light mode
+.episode-player {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  
+  iframe {
+    border-radius: 4px;
+  }
+}
+
+// Add horizontal line below h1 headings in all markdown files
+// h1 should have a thicker line than h2
+// Only apply to h1 in main content, not in navbar or sidebar
+main h1,
+.content h1,
+.quarto-content h1,
+#quarto-content h1,
+.page-columns h1,
+.page-layout-article h1,
+main section h1,
+.content section h1,
+.quarto-content section h1,
+#quarto-content section h1,
+section.level1 h1 {
+  font-size: 1.8rem !important;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  margin-top: 0.15em !important;
+}
+
+// Add tiny top spacing for section containing h1
+section.level1 {
+  margin-top: 0.15em !important;
+  padding-top: 0.1em !important;
+}
+
+// Minimize spacing from empty title-block-header
+#title-block-header.quarto-title-block {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: 0 !important;
+  height: 0 !important;
+}
+
+// Ensure h2 has a thinner line than h1
+// Only apply to h2 in main content, not in navbar or sidebar
+main h2,
+.content h2,
+.quarto-content h2,
+#quarto-content h2,
+.page-columns h2,
+.page-layout-article h2,
+main section h2,
+.content section h2,
+.quarto-content section h2,
+#quarto-content section h2,
+section.level2 h2 {
+  font-size: 1.4rem !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 0.3em;
+  margin-bottom: 0.8em;
+}
+
+// Keep font sizes consistent on mobile devices - use very specific selectors
+@media (max-width: 991.98px) {
+  main h1,
+  .content h1,
+  .quarto-content h1,
+  #quarto-content h1,
+  .page-columns h1,
+  .page-layout-article h1,
+  main section h1,
+  .content section h1,
+  .quarto-content section h1,
+  #quarto-content section h1,
+  section.level1 h1,
+  #quarto-document-content h1 {
+    font-size: 1.8rem !important;
+  }
+  
+  main h2,
+  .content h2,
+  .quarto-content h2,
+  #quarto-content h2,
+  .page-columns h2,
+  .page-layout-article h2,
+  main section h2,
+  .content section h2,
+  .quarto-content section h2,
+  #quarto-content section h2,
+  section.level2 h2,
+  #quarto-document-content h2 {
+    font-size: 1.4rem !important;
+  }
+}
+
+// List items should match normal text size
+ul li, ol li {
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 0.5em;
+  
+  // Nested list items should match parent items
+  ul li, ol li {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 0.4em;
+    
+    // Further nested items should also match
+    ul li, ol li {
+      font-size: 1em;
+      line-height: 1.4;
+      margin-bottom: 0.3em;
+    }
+  }
+}
+
+// Universal override for h1 and h2 font sizes - must be last to override Bootstrap
+#quarto-document-content h1,
+#quarto-document-content section h1,
+#quarto-document-content .level1 h1 {
+  font-size: 1.8rem !important;
+}
+
+#quarto-document-content h2,
+#quarto-document-content section h2,
+#quarto-document-content .level2 h2 {
+  font-size: 1.4rem !important;
+}
+
+@media (max-width: 991.98px) {
+  #quarto-document-content h1,
+  #quarto-document-content section h1,
+  #quarto-document-content .level1 h1 {
+    font-size: 1.8rem !important;
+  }
+  
+  #quarto-document-content h2,
+  #quarto-document-content section h2,
+  #quarto-document-content .level2 h2 {
+    font-size: 1.4rem !important;
+  }
+}
+
+// Make TOC title and all TOC items smaller
+#toc-title {
+  font-size: 0.9rem !important;
+}
+
+#TOC .nav-link,
+#TOC a,
+#TOC li,
+#quarto-margin-sidebar .nav-link,
+#quarto-margin-sidebar a {
+  font-size: 0.85rem !important;
+}
+
+// Hide callout icon (exclamation mark) from all callouts
+.callout-icon,
+.callout-icon-container {
+  display: none !important;
+}
+
+// RTL fix for callout toggle chevrons
+// Quarto uses a background-image SVG chevron-down and rotates it -90deg when collapsed (points right)
+// For RTL, we need to rotate +90deg when collapsed (points left)
+
+// Collapsed state (RTL): rotate +90deg so chevron points LEFT instead of RIGHT
+.callout .callout-header[aria-expanded="false"] .callout-toggle::before,
+.callout .callout-header.collapsed .callout-toggle::before {
+  transform: rotate(90deg) !important;
+}
+
+// Expanded state: no rotation, chevron points DOWN (default behavior is correct)
+.callout .callout-header[aria-expanded="true"] .callout-toggle::before,
+.callout .callout-header:not(.collapsed) .callout-toggle::before {
+  transform: none !important;
+}

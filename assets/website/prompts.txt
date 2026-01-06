@@ -1,0 +1,11 @@
+Cursor Prompt:
+
+@2-transcript.md is a Persian (Farsi) transcript of a podcast.
+Make it more readible by merging the different related text blocks and removing unnecessary spaces and new lines.
+More importantly, fix typos since this transcript has been generated with AI.
+
+@chista.ryanxai.com/source/Episode-02/3-transcript.md Translate all the text in a verbatim manner to Persian (Farsi).
+You should figure out which sentence belongs to which speaker and add it to your translation.
+
+NotebookLM Prompt:
+Create a bibliography of all articles, videos, ... used in this podcast. You definitely need to use google search to do that. I want the list of references with the links.

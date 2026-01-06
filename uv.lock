@@ -1,0 +1,20 @@
+version = 1
+revision = 3
+requires-python = ">=3.13.0"
+
+[[package]]
+name = "chista.ryanxai.com"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "khayyam" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "khayyam", specifier = ">=3.0.17" }]
+
+[[package]]
+name = "khayyam"
+version = "3.0.17"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/09/51/0af60dfa44b5cc8719ab29d73e8d281cfa628b74ea621548ce2e2dbdd088/Khayyam-3.0.17.tar.gz", hash = "sha256:d0a30c6e9caa56a7f730879df8f3fe0ad7d9fa8c57b0d8f479cfa0460a7647f2", size = 46980, upload-time = "2017-06-05T23:05:16.852Z" }

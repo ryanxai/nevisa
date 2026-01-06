@@ -1,0 +1,465 @@
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set PDF icon for sidebar tools
+    function setPdfIcon() {
+      // Look for sidebar navigation tools with PDF links
+      const pdfLinks = document.querySelectorAll('a.quarto-navigation-tool');
+      pdfLinks.forEach(function(link) {
+        // Check if this link points to a PDF file
+        if (link.href && (link.href.includes('.pdf') || link.href.includes('Chista.pdf'))) {
+          const icon = link.querySelector('i');
+          if (icon) {
+            icon.className = 'fa-solid fa-file-pdf';
+            icon.style.fontSize = '1.6em';
+          }
+        }
+        // Also check for Bootstrap file-pdf icon class
+        const biPdfIcon = link.querySelector('i.bi-file-pdf');
+        if (biPdfIcon) {
+          biPdfIcon.className = 'fa-solid fa-file-pdf';
+          biPdfIcon.style.fontSize = '1.6em';
+        }
+      });
+    }
+    
+    // Set PDF icon immediately and after delays to catch dynamic loading
+    setPdfIcon();
+    setTimeout(setPdfIcon, 100);
+    setTimeout(setPdfIcon, 500);
+    
+    // Also handle the old selector for backward compatibility
+    const oldPdfLink = document.querySelector('a[href*="Nadastan-Ba-Ryan.pdf"].quarto-navigation-tool');
+    if (oldPdfLink) {
+      const icon = oldPdfLink.querySelector('i');
+      if (icon) {
+        icon.className = 'fa-solid fa-file-pdf';
+        icon.style.fontSize = '1.6em';
+      }
+    }
+    
+    // Set Castbox icon
+    const castboxLink = document.querySelector('a[href*="castbox.fm"].quarto-navigation-tool');
+    if (castboxLink) {
+      const icon = castboxLink.querySelector('i');
+      if (icon) {
+        icon.className = 'fa-solid fa-headphones';
+        icon.style.fontSize = '1.6em';
+      }
+    }
+    
+    // Set website title in mobile navigation bar
+    const navTitle = document.querySelector('.quarto-secondary-nav-title');
+    if (navTitle) {
+      navTitle.textContent = "چیستا";
+    }
+    
+    // Function to check if dark mode is active
+    function isDarkMode() {
+      // Check localStorage first
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      if (storageValue === "alternate") return true;
+      if (storageValue === "default") return false;
+      
+      // Fallback: check if alternate stylesheets are active
+      const alternateStylesheets = document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      if (alternateStylesheets.length > 0) {
+        const alternateActive = Array.from(alternateStylesheets).some(link => link.rel !== 'disabled-stylesheet');
+        return alternateActive;
+      }
+      
+      return false;
+    }
+    
+    // Function to update theme toggle icon (sun in dark mode, moon in light mode)
+    function updateThemeToggleIcon() {
+      const toggle = document.querySelector('.quarto-color-scheme-toggle.quarto-navigation-tool');
+      if (!toggle) return;
+      
+      let icon = toggle.querySelector('i');
+      if (!icon) {
+        // Create icon if it doesn't exist
+        icon = document.createElement('i');
+        toggle.appendChild(icon);
+      }
+      
+      const isDark = isDarkMode();
+      
+      // Set icon: sun when in dark mode (clicking will switch to light), moon when in light mode (clicking will switch to dark)
+      if (isDark) {
+        icon.className = 'fa-solid fa-sun';
+        toggle.title = 'Switch to light mode';
+      } else {
+        icon.className = 'fa-solid fa-moon';
+        toggle.title = 'Switch to dark mode';
+      }
+      icon.style.fontSize = '1.6em';
+    }
+    
+    // Update icon on page load and after delays to catch dynamic loading
+    updateThemeToggleIcon();
+    setTimeout(updateThemeToggleIcon, 100);
+    setTimeout(updateThemeToggleIcon, 500);
+    
+    // Override the Quarto toggle function to update icon after toggle
+    // Wait for it to be available if not yet defined
+    function setupToggleOverride() {
+      if (window.quartoToggleColorScheme) {
+        const originalToggleColorScheme = window.quartoToggleColorScheme;
+        window.quartoToggleColorScheme = function() {
+          originalToggleColorScheme();
+          // Update icon after a short delay to ensure theme has switched
+          setTimeout(updateThemeToggleIcon, 100);
+        };
+        return true;
+      }
+      return false;
+    }
+    
+    // Try to setup override immediately
+    if (!setupToggleOverride()) {
+      // Try again after delays
+      setTimeout(function() {
+        if (!setupToggleOverride()) {
+          setTimeout(setupToggleOverride, 500);
+        }
+      }, 100);
+    }
+    
+    // Listen for theme changes via storage events (in case theme changes elsewhere)
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'quarto-color-scheme') {
+        setTimeout(updateThemeToggleIcon, 100);
+      }
+    });
+    
+    // Update icon when clicking the toggle (using event delegation)
+    document.addEventListener('click', function(e) {
+      const toggle = e.target.closest('.quarto-color-scheme-toggle.quarto-navigation-tool');
+      if (toggle) {
+        setTimeout(updateThemeToggleIcon, 100);
+      }
+    });
+    
+    // Use mutation observer to catch dynamically loaded toggle
+    const toggleObserver = new MutationObserver(function(mutations) {
+      updateThemeToggleIcon();
+    });
+    toggleObserver.observe(document.body, { childList: true, subtree: true });
+    // Function to setup logo and title links
+    function setupLogoAndTitle() {
+      const logoLink = document.querySelector('.sidebar-logo-link');
+      const sidebarHeader = document.querySelector('.sidebar-header');
+      if (!logoLink || !sidebarHeader) return false;
+      
+      // Update logo link to point to homepage (index.html)
+      const pathname = window.location.pathname;
+      const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
+      const depth = segments.length;
+      const rootPath = depth > 0 ? '../'.repeat(depth) : './';
+      logoLink.href = rootPath + 'index.html';
+      logoLink.removeAttribute('target');
+      logoLink.removeAttribute('rel');
+      
+      // Add clickable title link if it doesn't exist
+      if (!document.querySelector('.sidebar-title-link')) {
+        const titleLink = document.createElement('a');
+        titleLink.className = 'sidebar-title-link';
+        titleLink.textContent = "چیستا";
+        // Calculate path to index.html
+        const pathname = window.location.pathname;
+        const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
+        const depth = segments.length;
+        const rootPath = depth > 0 ? '../'.repeat(depth) : './';
+        titleLink.href = rootPath + 'index.html';
+        titleLink.title = 'Home';
+        titleLink.setAttribute('aria-label', "چیستا - Home");
+        // Insert before sidebar-tools-main
+        const toolsMain = document.querySelector('.sidebar-tools-main');
+        if (toolsMain) {
+          sidebarHeader.insertBefore(titleLink, toolsMain);
+        } else {
+          sidebarHeader.insertBefore(titleLink, sidebarHeader.firstChild);
+        }
+      }
+      
+      // Add home icon link to tools container (leftmost position)
+      const toolsMain = document.querySelector('.sidebar-tools-main');
+      if (toolsMain && !document.querySelector('.sidebar-home-link')) {
+        const homeLink = document.createElement('a');
+        homeLink.className = 'sidebar-home-link quarto-navigation-tool px-1';
+        // Go to homepage (index.html)
+        const pathname = window.location.pathname;
+        const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
+        const depth = segments.length;
+        const rootPath = depth > 0 ? '../'.repeat(depth) : './';
+        homeLink.href = rootPath + 'index.html';
+        homeLink.removeAttribute('target');
+        homeLink.removeAttribute('rel');
+        homeLink.title = 'Home';
+        homeLink.setAttribute('aria-label', 'Home');
+        // Add Font Awesome home icon
+        const icon = document.createElement('i');
+        icon.className = 'fa-solid fa-home';
+        icon.style.fontSize = '1.1em';
+        homeLink.appendChild(icon);
+        // Insert as first child (leftmost position)
+        toolsMain.insertBefore(homeLink, toolsMain.firstChild);
+      }
+      
+      return true;
+    }
+    
+    // Try immediately
+    if (!setupLogoAndTitle()) {
+      // Try again after delays
+      setTimeout(function() {
+        if (!setupLogoAndTitle()) {
+          setTimeout(setupLogoAndTitle, 500);
+        }
+      }, 100);
+    }
+    
+    // Use mutation observer to catch dynamically loaded sidebar
+    const observer = new MutationObserver(function(mutations) {
+      setupLogoAndTitle();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    
+    // Fix source link for index page: map index.md to README.md
+    function fixIndexSourceLink() {
+      // Check if we're on the index page
+      const isIndexPage = window.location.pathname.endsWith('/index.html') || 
+                          window.location.pathname.endsWith('/') ||
+                          window.location.pathname === '/index.html';
+      
+      if (isIndexPage) {
+        // Find all source links that point to index.md
+        const sourceLinks = document.querySelectorAll('a.toc-action[href*="index.md"]');
+        sourceLinks.forEach(function(link) {
+          // Replace index.md with README.md in the href
+          link.href = link.href.replace(/index\.md/, 'README.md');
+        });
+      }
+    }
+    
+    // Fix index source link immediately and after DOM changes
+    fixIndexSourceLink();
+    
+    // Intercept clicks on logo link to ensure they go to homepage
+    document.addEventListener('click', function(e) {
+      const clickedLink = e.target.closest('.sidebar-logo-link');
+      const clickedTitle = e.target.closest('.sidebar-title-link');
+      
+      // If clicking on title link, let it work normally (goes to home)
+      if (clickedTitle) {
+        return true;
+      }
+      
+      // If clicking on logo link (but not title), navigate to homepage
+      if (clickedLink && !clickedTitle) {
+        e.preventDefault();
+        e.stopPropagation();
+        const pathname = window.location.pathname;
+        const segments = pathname.split('/').filter(s => s && !s.endsWith('.html'));
+        const depth = segments.length;
+        const rootPath = depth > 0 ? '../'.repeat(depth) : './';
+        window.location.href = rootPath + 'index.html';
+        return false;
+      }
+    }, true); // Use capture phase
+    
+    // Also fix source link when sidebar is dynamically loaded
+    const sourceLinkObserver = new MutationObserver(function(mutations) {
+      fixIndexSourceLink();
+    });
+    sourceLinkObserver.observe(document.body, { childList: true, subtree: true });
+    
+    // Replace "on this page" with Persian text
+    function replaceOnThisPageText() {
+      // Find all elements containing "on this page" (case insensitive)
+      const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+      
+      const textNodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        if (node.textContent.toLowerCase().includes('on this page')) {
+          textNodes.push(node);
+        }
+      }
+      
+      textNodes.forEach(function(textNode) {
+        textNode.textContent = textNode.textContent.replace(/on this page/gi, 'در این صفحه');
+      });
+      
+      // Also check for elements with specific classes that might contain this text
+      const tocElements = document.querySelectorAll('.quarto-listing-category-title, .toc-actions, .quarto-title-block');
+      tocElements.forEach(function(el) {
+        if (el.textContent.toLowerCase().includes('on this page')) {
+          el.textContent = el.textContent.replace(/on this page/gi, 'در این صفحه');
+        }
+      });
+    }
+    
+    // Replace text immediately and after DOM changes
+    replaceOnThisPageText();
+    setTimeout(replaceOnThisPageText, 100);
+    setTimeout(replaceOnThisPageText, 500);
+    
+    // Use mutation observer to catch dynamically loaded content
+    const onThisPageObserver = new MutationObserver(function(mutations) {
+      replaceOnThisPageText();
+    });
+    onThisPageObserver.observe(document.body, { childList: true, subtree: true, characterData: true });
+    
+    // Fix sidebar chevron icons: left when collapsed, down when expanded
+    function updateSidebarChevrons() {
+      const toggles = document.querySelectorAll('.sidebar-item-toggle');
+      toggles.forEach(function(toggle) {
+        const icon = toggle.querySelector('i.bi');
+        if (icon) {
+          const isCollapsed = toggle.classList.contains('collapsed');
+          const ariaExpanded = toggle.getAttribute('aria-expanded');
+          
+          // Remove all chevron classes first
+          icon.classList.remove('bi-chevron-right', 'bi-chevron-left', 'bi-chevron-down', 'bi-chevron-up');
+          
+          if (isCollapsed || ariaExpanded === 'false') {
+            // Collapsed: show chevron-left (pointing left in RTL sidebar)
+            icon.classList.add('bi-chevron-left');
+          } else {
+            // Expanded: show chevron-down
+            icon.classList.add('bi-chevron-down');
+          }
+        }
+      });
+    }
+    
+    // Initial update
+    updateSidebarChevrons();
+    setTimeout(updateSidebarChevrons, 100);
+    setTimeout(updateSidebarChevrons, 500);
+    
+    // Listen for Bootstrap collapse events
+    document.addEventListener('show.bs.collapse', function(e) {
+      setTimeout(updateSidebarChevrons, 50);
+    });
+    document.addEventListener('hide.bs.collapse', function(e) {
+      setTimeout(updateSidebarChevrons, 50);
+    });
+    document.addEventListener('shown.bs.collapse', updateSidebarChevrons);
+    document.addEventListener('hidden.bs.collapse', updateSidebarChevrons);
+    
+    // Also listen for clicks on sidebar toggles
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('.sidebar-item-toggle')) {
+        setTimeout(updateSidebarChevrons, 100);
+        setTimeout(updateSidebarChevrons, 300);
+      }
+    });
+    
+    // Use mutation observer to catch dynamic changes
+    const chevronObserver = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && 
+            (mutation.attributeName === 'class' || mutation.attributeName === 'aria-expanded')) {
+          updateSidebarChevrons();
+        }
+      });
+    });
+    
+    // Observe all sidebar toggles for class changes
+    setTimeout(function() {
+      document.querySelectorAll('.sidebar-item-toggle').forEach(function(toggle) {
+        chevronObserver.observe(toggle, { attributes: true, attributeFilter: ['class', 'aria-expanded'] });
+      });
+    }, 500);
+    
+    // Fix callout chevron icons for RTL: left when collapsed, down when expanded
+    function updateCalloutChevrons() {
+      const calloutHeaders = document.querySelectorAll('.callout-header');
+      calloutHeaders.forEach(function(header) {
+        const icon = header.querySelector('.callout-toggle');
+        if (icon) {
+          const ariaExpanded = header.getAttribute('aria-expanded');
+          const isCollapsed = header.classList.contains('collapsed') || ariaExpanded === 'false';
+          
+          // Remove all chevron classes first
+          icon.classList.remove('bi-chevron-right', 'bi-chevron-left', 'bi-chevron-down', 'bi-chevron-up');
+          
+          // Ensure bi class is present
+          if (!icon.classList.contains('bi')) {
+            icon.classList.add('bi');
+          }
+          
+          if (isCollapsed) {
+            // Collapsed: show chevron-left (pointing left for RTL layout)
+            icon.classList.add('bi-chevron-left');
+          } else {
+            // Expanded: show chevron-down
+            icon.classList.add('bi-chevron-down');
+          }
+        }
+      });
+    }
+    
+    // Initial update for callouts
+    updateCalloutChevrons();
+    setTimeout(updateCalloutChevrons, 100);
+    setTimeout(updateCalloutChevrons, 500);
+    
+    // Listen for Bootstrap collapse events on callouts
+    document.addEventListener('show.bs.collapse', function(e) {
+      if (e.target.classList.contains('callout-collapse') || e.target.closest('.callout')) {
+        setTimeout(updateCalloutChevrons, 50);
+      }
+    });
+    document.addEventListener('hide.bs.collapse', function(e) {
+      if (e.target.classList.contains('callout-collapse') || e.target.closest('.callout')) {
+        setTimeout(updateCalloutChevrons, 50);
+      }
+    });
+    document.addEventListener('shown.bs.collapse', function(e) {
+      if (e.target.classList.contains('callout-collapse') || e.target.closest('.callout')) {
+        updateCalloutChevrons();
+      }
+    });
+    document.addEventListener('hidden.bs.collapse', function(e) {
+      if (e.target.classList.contains('callout-collapse') || e.target.closest('.callout')) {
+        updateCalloutChevrons();
+      }
+    });
+    
+    // Also listen for clicks on callout headers
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('.callout-header')) {
+        setTimeout(updateCalloutChevrons, 100);
+        setTimeout(updateCalloutChevrons, 300);
+      }
+    });
+    
+    // Use mutation observer to catch dynamic changes for callouts
+    const calloutChevronObserver = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && 
+            (mutation.attributeName === 'class' || mutation.attributeName === 'aria-expanded')) {
+          updateCalloutChevrons();
+        }
+      });
+    });
+    
+    // Observe all callout headers for class changes
+    setTimeout(function() {
+      document.querySelectorAll('.callout-header').forEach(function(header) {
+        calloutChevronObserver.observe(header, { attributes: true, attributeFilter: ['class', 'aria-expanded'] });
+      });
+    }, 500);
+    
+  });
+</script>

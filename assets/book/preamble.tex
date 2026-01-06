@@ -1,0 +1,85 @@
+\usepackage{fontspec}
+\defaultfontfeatures{Renderer=HarfBuzz}
+\usepackage{polyglossia}
+\newfontfamily\arabicfont[Script=Arabic,Language=Persian]{Vazirmatn}
+\newfontfamily\arabicfontsf[Script=Arabic,Language=Persian]{Vazirmatn}
+\newfontfamily\arabicfonttt[Script=Arabic,Language=Persian]{Vazirmatn}
+\setdefaultlanguage{persian}
+\setotherlanguage{english}
+\usepackage{bidi}
+\addto\captionspersian{\renewcommand{\contentsname}{فهرست اپیزودها}}
+
+% Increase line spacing for normal text (1.5 = one-and-a-half spacing)
+\usepackage{setspace}
+\setstretch{1.5}
+
+% Increase vertical spacing between list items
+% Override Pandoc's \tightlist command which normally removes spacing
+% This is the KEY fix - Pandoc generates \tightlist which sets spacing to 0
+\def\tightlist{%
+  \setlength{\itemsep}{1em}%
+  \setlength{\parskip}{0.5em}%
+  \setlength{\parsep}{0.5em}%
+}
+
+% Redefine \today to use Jalali calendar (must be early, before polyglossia formats it)
+\makeatletter
+% Read the Persian date from file (created by build script before Quarto compilation)
+% The file contains \def\jalalidate{...}
+\IfFileExists{persian-date.tex}{%
+  \input{persian-date.tex}%
+  \typeout{Successfully loaded Persian date}%
+}{%
+  \def\jalalidate{تاریخ نامشخص}%
+  \typeout{Warning: Persian date file not found. The build script should create it before compilation.}%
+}
+% Redefine \today to use Persian date (before polyglossia formats it)
+\renewcommand{\today}{\jalalidate}
+
+\usepackage{etoolbox}
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+
+% Suppress figure numbering and captions for images without caption text
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}
+
+\renewcommand{\maketitle}{%
+  \begin{titlepage}
+    \vspace*{\fill}
+    \begin{center}
+      {\fontsize{54pt}{64pt}\selectfont\bfseries
+        چیستا\par}
+      \vspace{8cm}
+      {\fontsize{20pt}{26pt}\selectfont\@author\par}
+      \vspace{1cm}
+      {\Large\jalalidate\par}
+    \end{center}
+    \vspace*{\fill}
+  \end{titlepage}
+}
+\renewcommand{\@makechapterhead}[1]{%
+  \clearpage
+  \vspace*{\fill}%
+  {\parindent \z@ \centering \normalfont
+    \interlinepenalty\@M
+    \fontsize{60pt}{72pt}\selectfont\bfseries #1\par\nobreak
+  }
+  \vspace*{\fill}%
+  \clearpage
+}
+\RedeclareSectionCommand[
+  font=\huge\bfseries,
+  beforeskip=-1000pt,
+  afterskip=3em
+]{section}
+\RedeclareSectionCommand[
+  font=\Large\bfseries
+]{subsection}
+\setkomafont{chapterentry}{\large\bfseries}
+\setkomafont{chapterentrypagenumber}{\large}
+\patchcmd{\scr@startsection}{\begingroup}{\clearpage\begingroup}{}{}
+\makeatother
+
+
+\def\contentsname{فهرست اپیزودها}
