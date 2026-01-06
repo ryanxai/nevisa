@@ -235,9 +235,53 @@ a[href*="github.com"].quarto-navigation-tool > i.fa-github {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
     transition: color 0.2s ease !important;
     
-    // Reduce font size on mobile devices
+    // Reduce font size on mobile devices and split into two lines
     @media (max-width: 768px) {
-      font-size: 1.1rem !important;
+      // Hide original text by making it invisible
+      font-size: 0 !important;
+      line-height: 0 !important;
+      color: transparent !important;
+      
+      // Display first line
+      &::before {
+        content: "چیستا: پلی میان دانش" !important;
+        display: block !important;
+        font-size: 1.1rem !important;
+        line-height: 1.4 !important;
+        color: white !important;
+      }
+      
+      // Display second line
+      &::after {
+        content: "جهانی و زبان فارسی" !important;
+        display: block !important;
+        font-size: 1.1rem !important;
+        line-height: 1.4 !important;
+        color: white !important;
+      }
+      
+      // Update colors on hover
+      &:hover {
+        &::before,
+        &::after {
+          color: #75AADB !important;
+        }
+      }
+      
+      // Update colors when visited
+      &:visited {
+        &::before,
+        &::after {
+          color: white !important;
+        }
+      }
+      
+      &:hover:visited {
+        &::before,
+        &::after {
+          color: #75AADB !important;
+        }
+      }
     }
     
     &:hover {
