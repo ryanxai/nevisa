@@ -49,6 +49,35 @@
       }
     }
     
+    // Set GitHub icon size
+    function setGithubIcon() {
+      const githubLinks = document.querySelectorAll('a.quarto-navigation-tool');
+      githubLinks.forEach(function(link) {
+        // Check if this link points to GitHub
+        if (link.href && link.href.includes('github.com')) {
+          const icon = link.querySelector('i');
+          if (icon) {
+            // Convert Bootstrap icon to Font Awesome if needed
+            if (icon.classList.contains('bi-github')) {
+              icon.className = 'fa-brands fa-github';
+            }
+            icon.style.fontSize = '1.6em';
+          }
+        }
+        // Also check for Bootstrap github icon class
+        const biGithubIcon = link.querySelector('i.bi-github');
+        if (biGithubIcon) {
+          biGithubIcon.className = 'fa-brands fa-github';
+          biGithubIcon.style.fontSize = '1.6em';
+        }
+      });
+    }
+    
+    // Set GitHub icon immediately and after delays to catch dynamic loading
+    setGithubIcon();
+    setTimeout(setGithubIcon, 100);
+    setTimeout(setGithubIcon, 500);
+    
     // Set website title in mobile navigation bar
     const navTitle = document.querySelector('.quarto-secondary-nav-title');
     if (navTitle) {

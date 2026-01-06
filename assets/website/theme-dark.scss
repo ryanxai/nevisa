@@ -181,6 +181,12 @@ a[href*="castbox.fm"].quarto-navigation-tool > i.fa-headphones {
   font-size: 1.6em !important;
 }
 
+// Make GitHub icon larger
+a[href*="github.com"].quarto-navigation-tool > i.bi-github,
+a[href*="github.com"].quarto-navigation-tool > i.fa-github {
+  font-size: 1.6em !important;
+}
+
 // Style dark/light toggle icons (sun and moon)
 .quarto-color-scheme-toggle.quarto-navigation-tool > i.bi,
 .quarto-color-scheme-toggle.quarto-navigation-tool > i.fa-sun,

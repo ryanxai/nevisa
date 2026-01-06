@@ -163,13 +163,13 @@ combine_markdown_files() {
         # Add audio (Castbox) link if available
         audio_url=$(get_episode_audio "$subdir")
         if [ -n "$audio_url" ]; then
-            echo "- [لینک پادکست تولید شده با هوش مصنوعی در کست باکس]($audio_url)" >> "$output_file"
+            echo "- [پادکست با هوش مصنوعی]($audio_url)" >> "$output_file"
         fi
         
         # Add video (YouTube) link if available
         video_url=$(get_episode_video "$subdir")
         if [ -n "$video_url" ]; then
-            echo "- [لینک ویدِئوی تولید شده با هوش مصنوعی]($video_url)" >> "$output_file"
+            echo "- [ویدِئو با هوش مصنوعی]($video_url)" >> "$output_file"
         fi
         
         echo "" >> "$output_file"

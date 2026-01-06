@@ -31,9 +31,9 @@ website:
     collapse-level: 1
     collapsed: true
     tools:
-      - icon: podcast
-        href: https://castbox.fm/channel/6694416?country=iran
-        text: "Castbox"  
+      - icon: github
+        href: https://github.com/ryanxai/nevisa
+        text: "GitHub"  
       - icon: file-pdf
         href: Chista.pdf
         text: "PDF"

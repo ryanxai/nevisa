@@ -5,8 +5,8 @@
 - [ترانوشت](https://chista.ryanxai.com/001-Mind-Body-Unity/3-transcript.html)
 - [اسلاید ها](https://chista.ryanxai.com/001-Mind-Body-Unity/slides.pdf)
 - [نقشه ذهنی](https://chista.ryanxai.com/001-Mind-Body-Unity/mindmap_auto.html)
-- [لینک پادکست تولید شده با هوش مصنوعی در کست باکس](https://castbox.fm/app/castbox/player/id6959804?utm_source=website&utm_medium=dlink&utm_campaign=web_share&utm_content=%D9%88%D8%AD%D8%AF%D8%AA%20%D8%B0%D9%87%D9%86%20%D9%88%20%D8%AA%D9%86-CastBox_FM)
-- [لینک ویدِئوی تولید شده با هوش مصنوعی](https://youtu.be/YrO7Rgl_xEw)
+- [پادکست با هوش مصنوعی](https://castbox.fm/app/castbox/player/id6959804?utm_source=website&utm_medium=dlink&utm_campaign=web_share&utm_content=%D9%88%D8%AD%D8%AF%D8%AA%20%D8%B0%D9%87%D9%86%20%D9%88%20%D8%AA%D9%86-CastBox_FM)
+- [ویدِئو با هوش مصنوعی](https://youtu.be/YrO7Rgl_xEw)
 
 ```{=latex}
 \vspace{1.5em}

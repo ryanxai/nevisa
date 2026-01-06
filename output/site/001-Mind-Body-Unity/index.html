@@ -46,9 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-d093b4b1195ef2c5c1421a2f4a30ba69.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-8ba8ebf90f71c6ccce2548c0f82db79d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-d093b4b1195ef2c5c1421a2f4a30ba69.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e7c73c12f1e095ef7f78b30417ce00c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-14fce084f35a75a51a5551b2e1feac58.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-e7c73c12f1e095ef7f78b30417ce00c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -126,6 +126,35 @@ ul.task-list li input[type="checkbox"] {
         icon.style.fontSize = '1.6em';
       }
     }
+    
+    // Set GitHub icon size
+    function setGithubIcon() {
+      const githubLinks = document.querySelectorAll('a.quarto-navigation-tool');
+      githubLinks.forEach(function(link) {
+        // Check if this link points to GitHub
+        if (link.href && link.href.includes('github.com')) {
+          const icon = link.querySelector('i');
+          if (icon) {
+            // Convert Bootstrap icon to Font Awesome if needed
+            if (icon.classList.contains('bi-github')) {
+              icon.className = 'fa-brands fa-github';
+            }
+            icon.style.fontSize = '1.6em';
+          }
+        }
+        // Also check for Bootstrap github icon class
+        const biGithubIcon = link.querySelector('i.bi-github');
+        if (biGithubIcon) {
+          biGithubIcon.className = 'fa-brands fa-github';
+          biGithubIcon.style.fontSize = '1.6em';
+        }
+      });
+    }
+    
+    // Set GitHub icon immediately and after delays to catch dynamic loading
+    setGithubIcon();
+    setTimeout(setGithubIcon, 100);
+    setTimeout(setGithubIcon, 500);
     
     // Set website title in mobile navigation bar
     const navTitle = document.querySelector('.quarto-secondary-nav-title');
@@ -746,7 +775,7 @@ ul.task-list li input[type="checkbox"] {
       <a href="../index.html" class="sidebar-logo-link">
       </a>
       <div class="sidebar-tools-main tools-wide">
-    <a href="https://castbox.fm/channel/6694416?country=iran" title="Castbox" class="quarto-navigation-tool px-1" aria-label="Castbox"><i class="bi bi-podcast"></i></a>
+    <a href="https://github.com/ryanxai/nevisa" title="GitHub" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
     <a href="../Chista.pdf" title="PDF" class="quarto-navigation-tool px-1" aria-label="PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
