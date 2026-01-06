@@ -261,7 +261,7 @@ create_subfolder_readme() {
 
 # Function to create main README.md
 create_main_readme() {
-    echo "#  فهرست مطالب" > README.md
+    echo "# فهرست مطالب" > README.md
     echo "" >> README.md
 
     # Find all subdirectories and sort them
