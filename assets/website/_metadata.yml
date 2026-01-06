@@ -1,0 +1,14 @@
+# Blog-style listing configuration
+# This will enable listings on pages in this directory
+# The index.md page will show a listing of all subdirectories (blog posts)
+listing:
+  type: default
+  contents:
+    - "*/index.md"
+  sort: "date desc"
+  fields:
+    - title
+    - description
+    - date
+    - image
+  image-height: 200px

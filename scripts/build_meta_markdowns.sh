@@ -261,44 +261,7 @@ create_subfolder_readme() {
 
 # Function to create main README.md
 create_main_readme() {
-    echo "# فهرست مطالب" > README.md
-    echo "" >> README.md
-
-    # Find all subdirectories and sort them
-    find . -maxdepth 1 -type d ! -name "." ! -name "_build" | sort | while read -r dir; do
-        # Get directory name without leading ./
-        dirname=$(basename "$dir")
-        # Convert to readable name (replace hyphens with spaces, capitalize)
-        display_name=$(echo "$dirname" | sed 's/-/ /g' | sed 's/\b\w/\U&/g')
-
-        # Check if README.md exists in this subdirectory
-        if [ -f "$dir/README.md" ]; then
-            # Try to find metadata.yml file to get the title
-            episode_yml=""
-            if [ -f "$dir/metadata.yml" ]; then
-                episode_yml="$dir/metadata.yml"
-            fi
-            link_text=""
-            
-            # Extract title from metadata.yml if it exists
-            if [ -n "$episode_yml" ] && [ -f "$episode_yml" ]; then
-                link_text=$(extract_yaml_value "$episode_yml" "title")
-            fi
-            
-            # If no title found from episode yml, try README.md
-            if [ -z "$link_text" ]; then
-                link_text=$(extract_heading "$dir/README.md")
-            fi
-            
-            # If still no heading found, use the display name
-            if [ -z "$link_text" ]; then
-                link_text="$display_name"
-            fi
-            
-            # Add link to the episode's directory (Quarto will render README.md as index)
-            echo "  - [$link_text]($dirname/)" >> README.md
-        fi
-    done
+    echo "# فهرست نوشته ها" > README.md
 }
 
 # Main execution

@@ -25,11 +25,8 @@ website:
 
   sidebar:
     # title: "چیستا"
-    contents: auto
-    background: "#D9E3E4"
-    logo: "logo.svg"
-    pinned: true
-    align: center
+    style: "floating"
+    search: true
     tools:
       - icon: podcast
         href: https://castbox.fm/channel/6694416?country=iran
@@ -37,10 +34,6 @@ website:
       - icon: file-pdf
         href: Chista.pdf
         text: "PDF"
-
-    # style: "docked"
-    search: true
-    collapse-level: 1
 
 format:
   html:
