@@ -235,6 +235,11 @@ a[href*="github.com"].quarto-navigation-tool > i.fa-github {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
     transition: color 0.2s ease !important;
     
+    // Reduce font size on mobile devices
+    @media (max-width: 768px) {
+      font-size: 1.1rem !important;
+    }
+    
     &:hover {
       color: #75AADB !important;
       text-decoration: none !important;
