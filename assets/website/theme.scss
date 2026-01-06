@@ -170,6 +170,10 @@ a[href*="github.com"].quarto-navigation-tool > i.fa-github {
     order: 3 !important;
     position: relative !important;
     margin-top: 0.5rem !important;
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
   
   .sidebar-tools-main {

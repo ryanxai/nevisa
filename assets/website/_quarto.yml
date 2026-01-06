@@ -10,7 +10,7 @@ website:
   title: "چیستا"
   bread-crumbs: false
   page-navigation: false
-  favicon: icon.png
+  favicon: icon.svg
   description: "چیستا"
 
   open-graph: true
@@ -25,6 +25,7 @@ website:
 
   sidebar:
     # title: "چیستا"
+    logo: logo.svg
     contents: auto
     style: "floating"
     search: true
