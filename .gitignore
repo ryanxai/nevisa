@@ -1,0 +1,8 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Environment variables
+.env
+
+# macOS system files
+.DS_Store
